@@ -12,7 +12,7 @@ export const signup = async (name, email, password, confirmPassword) => {
     // console.log("💵💵💵" + res.data);
     const res = await axios({
       method: "POST",
-      url: "http://127.0.0.1:3001/api/v1/users/signup",
+      url: "/api/v1/users/signup",
       data: {
         name,
         email,

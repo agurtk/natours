@@ -38,7 +38,7 @@ exports.getTour = catchAsync(async (req, res, next) => {
 exports.getLogin = (req, res) => {
   res
     .status(200)
-    .set("Content-Security-Policy", "connect-src 'self' http://localhost:3001/")
+    // .set("Content-Security-Policy", "connect-src 'self' http://localhost:3001/")
     .render("login", {
       title: "Log into your account",
     });
@@ -47,7 +47,7 @@ exports.getLogin = (req, res) => {
 exports.getSignup = (req, res) => {
   res
     .status(200)
-    .set("Content-Security-Policy", "connect-src 'self' http://localhost:3001/")
+    // .set("Content-Security-Policy", "connect-src 'self' http://localhost:3001/")
     .render("signup", {
       title: "create your account",
     });

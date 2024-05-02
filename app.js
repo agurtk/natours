@@ -7,6 +7,8 @@ const helmet = require("helmet");
 const hpp = require("hpp");
 
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const compress = require("compression");
 const AppError = require("./utils/appError");
 const golbalErrorHandler = require("./controllers/errorController");
 const tourRouter = require("./routes/tourRoutes");
@@ -25,7 +27,7 @@ app.set("views", path.join(__dirname, "views"));
 // serving static files
 app.use(express.static(path.join(__dirname, "public")));
 // app.use(express.static(`${__dirname}/public`));
-
+app.use(cors());
 // set security HTTP headers
 app.use(helmet());
 
@@ -46,9 +48,9 @@ const styleSrcUrls = [
 const connectSrcUrls = [
   "https://*.mapbox.com/",
   "https://*.cloudflare.com",
-  "http://127.0.0.1:3001",
-  "http://localhost:3001",
-  "http://127.0.0.1:52191",
+  // "http://127.0.0.1:3001",
+  // "http://localhost:3001",
+  // "http://127.0.0.1:52191",
   "*.stripe.com",
   "*.stripe.com/v3",
 ];
@@ -106,6 +108,8 @@ app.use(
     ],
   }),
 );
+
+app.use(compress());
 
 // test middleware
 app.use((req, res, next) => {
