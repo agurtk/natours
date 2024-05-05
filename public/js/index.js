@@ -10,7 +10,7 @@ import { signup } from "./signup.js";
 // dom elements
 const mapBox = document.getElementById("map");
 const loginForm = document.querySelector(".form--login");
-// const signupForm = document.querySelector(".form--signup");
+const signupForm = document.querySelector(".form--signup");
 const logoutBtn = document.querySelector(".nav__el--logout");
 const userDataForm = document.querySelector(".form-user-data");
 const userPasswordForm = document.querySelector(".form-user-password");
@@ -23,24 +23,23 @@ if (mapBox) {
 }
 
 if (loginForm)
-  console.log("login form");
-  loginForm.addEventListener("submit", (event) => {
-    const email = document.querySelector("#email").value;
-    const password = document.querySelector("#password").value;
-    event.preventDefault();
-    login(email, password);
-  });
+loginForm.addEventListener("submit", (event) => {
+  const email = document.querySelector("#email").value;
+  const password = document.querySelector("#password").value;
+  event.preventDefault();
+  login(email, password);
+});
 
-// if (signupForm)
-// console.log("_signup form");
-//   signupForm.addEventListener("submit", (event) => {
-//     const name = document.querySelector("#name_signup").value;
-//     const email = document.querySelector("#email_signup").value;
-//     const password = document.querySelector("#password_signup").value;
-//     const confirmPassword = document.querySelector("#confirmPassword_signup").value;
-//     event.preventDefault();
-//     signup(name, email, password, confirmPassword);
-//   });
+if (signupForm)
+signupForm.addEventListener("submit", (event) => {
+  const name = document.querySelector("#name-signup").value;
+  const email = document.querySelector("#email-signup").value;
+  const password = document.querySelector("#password-signup").value;
+  const passwordConfirm = document.querySelector("#confirm-password-signup").value;
+  event.preventDefault();
+  console.log("💵💵💵💵💵💵💵", name, email, password, passwordConfirm);
+  signup(name, email, password, passwordConfirm);
+});
 
 if (logoutBtn) {
   logoutBtn.addEventListener("click", logout);

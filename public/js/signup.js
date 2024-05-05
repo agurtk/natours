@@ -5,7 +5,7 @@
 import axios from "axios";
 import { showAlert } from "./alerts";
 
-export const signup = async (name, email, password, confirmPassword) => {
+export const signup = async (name, email, password, passwordConfirm) => {
   try {
     // console.log(email, password);
     // const res = await axios.post("/api/v1/users/login", { email, password });
@@ -17,7 +17,7 @@ export const signup = async (name, email, password, confirmPassword) => {
         name,
         email,
         password,
-        confirmPassword,
+        passwordConfirm,
       },
     });
     console.log("💵💵💵" + res.data);
