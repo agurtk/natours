@@ -23,34 +23,22 @@ exports.getTour = catchAsync(async (req, res, next) => {
     return next(new AppError("There is no tour with that name", 404));
   }
 
-  res
-    .status(200)
-    .set(
-      "Content-Security-Policy",
-      "default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;",
-    )
-    .render("tour", {
-      title: `${tour.name} Tour`,
-      data: tour,
-    });
+  res.status(200).render("tour", {
+    title: `${tour.name} Tour`,
+    data: tour,
+  });
 });
 
 exports.getLogin = (req, res) => {
-  res
-    .status(200)
-    // .set("Content-Security-Policy", "connect-src 'self' http://localhost:3001/")
-    .render("login", {
-      title: "Log into your account",
-    });
+  res.status(200).render("login", {
+    title: "Log into your account",
+  });
 };
 
 exports.getSignup = (req, res) => {
-  res
-    .status(200)
-    // .set("Content-Security-Policy", "connect-src 'self' http://localhost:3001/")
-    .render("signup", {
-      title: "create your account",
-    });
+  res.status(200).render("signup", {
+    title: "create your account",
+  });
 };
 
 exports.getAccount = (req, res) => {

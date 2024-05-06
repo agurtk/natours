@@ -7,17 +7,17 @@ module.exports = class Email {
     this.to = user.email;
     this.firstName = user.name.split(" ")[0];
     this.url = url;
-    this.from = `RavTech <${process.env.EMAIL_FROM}>`;
+    this.from = `RavTech <amichai@mailsac.com>`;
   }
 
   newTransport() {
     if (process.env.NODE_ENV === "production") {
       // Sendgrid
       return nodemailer.createTransport({
-        service: "Gmail",
+        service: "SendGrid",
         auth: {
-          user: process.env.GMAIL_USERNAME,
-          password: process.env.GMAIL_PASSWORD,
+          user: process.env.SENDGRID_USERNAME,
+          pass: process.env.SENDGRID_PASSWORD,
         },
       });
     }
@@ -63,7 +63,7 @@ module.exports = class Email {
   async sendPasswordReset() {
     await this.send(
       "PasswordReset",
-      "Your password reset token (valid for only 10 minutes)",
+      "Your password reset token (valid for 10 minutes)",
     );
   }
 };

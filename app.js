@@ -45,48 +45,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // set security HTTP headers
 app.use(helmet());
 
-const scriptSrcUrls = [
-  "https://api.tiles.mapbox.com/",
-  "https://api.mapbox.com/",
-  "https://*.cloudflare.com",
-  "https://js.stripe.com/v3/",
-  "https://checkout.stripe.com",
-];
-const styleSrcUrls = [
-  "https://api.mapbox.com/",
-  "https://api.tiles.mapbox.com/",
-  "https://fonts.googleapis.com/",
-  "https://www.myfonts.com/fonts/radomir-tinkov/gilroy/*",
-  " checkout.stripe.com",
-];
-const connectSrcUrls = [
-  "https://*.mapbox.com/",
-  "https://*.cloudflare.com",
-  // "http://127.0.0.1:3001",
-  // "http://localhost:3001",
-  // "http://127.0.0.1:52191",
-  "*.stripe.com",
-  "*.stripe.com/v3",
-];
-
-const fontSrcUrls = ["fonts.googleapis.com", "fonts.gstatic.com"];
-
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: [],
-      connectSrc: ["'self'", ...connectSrcUrls],
-      scriptSrc: ["'self'", ...scriptSrcUrls],
-      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-      workerSrc: ["'self'", "blob:"],
-      objectSrc: [],
-      imgSrc: ["'self'", "blob:", "data:"],
-      fontSrc: ["'self'", ...fontSrcUrls],
-      frameSrc: ["*.stripe.com", "*.stripe.network"],
-    },
-  }),
-);
-
+// eslint-disable-next-line no-console
 console.log("NODE ENVIRONMENT:", process.env.NODE_ENV);
 // development logging
 if (process.env.NODE_ENV === "dev") {

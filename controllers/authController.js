@@ -14,16 +14,15 @@ const signToken = (id) =>
 
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
-
   const cookieOptions = {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000, // convert from ms to days
     ),
-    // secure: false, // if ture only send cookie over https (encrypted connection)
-    secure: req.secure || req.headers("x-forwarded-proto") === "https", // if ture only send cookie over https (encrypted connection)
+    secure: false, // if ture only send cookie over https (encrypted connection)
+    // secure: req.secure || req.headers("x-forwarded-proto") === "https", // if ture only send cookie over https (encrypted connection)
     httpOnly: true, // cannot be accessed and modified by the browser
   };
-  // if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
   // if (req.secure || req.headers("x-forwarded-proto") === "https")
   //   cookieOptions.secure = true;
 
@@ -172,7 +171,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const resetToken = user.createPasswordRestToken();
   await user.save({ validateBeforeSave: false });
   //    3 send it to user's email
-  const resetURL = `${req.protocol}://${req.get("host")}/api/v1/users/resetPassword/${resetToken}`;
   // const message = `Forgot your password? submit a PATCH request with your new password and passwordConfirm to: ${resetURL}. \nIf you didn't forget your password, please ignore this email!`;
   try {
     // await sendEmail({
@@ -181,6 +179,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     //   message,
     // });
 
+    const resetURL = `${req.protocol}://${req.get("host")}/api/v1/users/resetPassword/${resetToken}`;
     await new Email(user, resetURL).sendPasswordReset();
 
     res.status(200).json({
