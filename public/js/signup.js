@@ -9,7 +9,6 @@ export const signup = async (name, email, password, passwordConfirm) => {
   try {
     // console.log(email, password);
     // const res = await axios.post("/api/v1/users/login", { email, password });
-    // console.log("💵💵💵" + res.data);
     const res = await axios({
       method: "POST",
       url: "/api/v1/users/signup",
@@ -20,7 +19,6 @@ export const signup = async (name, email, password, passwordConfirm) => {
         passwordConfirm,
       },
     });
-    console.log("💵💵💵" + res.data);
 
     if (res.data.status === "success") {
       showAlert("success", "Signed up successfully");

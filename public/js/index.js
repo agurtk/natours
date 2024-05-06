@@ -85,7 +85,6 @@ if (bookBtn) {
     event.target.textContent = "Processing...";
     // const tourId = event.target.dataset.tourId
     const { tourId } = event.target.dataset;
-    console.log("💵💵💵💵 - tour ID : "+tourId);
     bookTour(tourId)
   });
 }
