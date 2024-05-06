@@ -19,15 +19,29 @@ const viewRouter = require("./routes/viewRoutes");
 
 const app = express();
 
+app.enabled("trust proxy");
+
 // pug is a templating engine designed to render HTML in server-side
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 // 1) GLOBAL MIDDLEWARES
+// implement CORS
+app.use(cors());
+//          for specific origin
+// app.use(
+//   cors({
+//     origin: "http://localhost:3001", // or
+//     origin: "www.mydomain.com",
+//   }),
+// );
+
+app.options("*", cors());
+// app.options("/api/v1/tours/:id/reviews", cors());
+
 // serving static files
 app.use(express.static(path.join(__dirname, "public")));
 // app.use(express.static(`${__dirname}/public`));
-app.use(cors());
 // set security HTTP headers
 app.use(helmet());
 

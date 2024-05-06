@@ -37,7 +37,6 @@ signupForm.addEventListener("submit", (event) => {
   const password = document.querySelector("#password-signup").value;
   const passwordConfirm = document.querySelector("#confirm-password-signup").value;
   event.preventDefault();
-  console.log("💵💵💵💵💵💵💵", name, email, password, passwordConfirm);
   signup(name, email, password, passwordConfirm);
 });
 
